@@ -1,9 +1,9 @@
-📚 CampusConnect
+A )CampusConnect
 
 A centralized platform for students to access clubs, tutors, team-building activities, and academic resources in one place.
 
-🚀 Features
-👥 User Management
+B) Features
+User Management
 
 Student sign-up and login
 
@@ -11,7 +11,7 @@ Lecturer sign-up/login
 
 Role-based pages (Student Dashboard & Lecturer Dashboard)
 
-🎓 Tutors Section
+   Tutors Section
 
 Display available tutors
 
@@ -21,7 +21,7 @@ Tutor ratings
 
 Lecturer profile display
 
-🤝 Team Building Activities
+    Team Building Activities
 
 Display upcoming activities
 
@@ -29,19 +29,19 @@ Students can join activities
 
 Admin/staff can create activities
 
-📰 Announcements
+     Announcements
 
 Lecturers can post announcements
 
 Students can view updates on their dashboards
 
-🧭 Clubs 
+    Clubs 
 
 Students browse and join clubs
 
 Club admins manage club updates
 
-🛠️ Technologies Used
+C)Technologies Used
 
 Django 4+
 
@@ -74,23 +74,23 @@ CampusConnect/
 └── manage.py
 
 ⚙️ Installation
-1️⃣ Clone the project
+1️ Clone the project
 git clone https://github.com/yourusername/CampusConnect.git
 cd CampusConnect
 
-2️⃣ Create a virtual environment
+2️ Create a virtual environment
 python -m venv env
 source env/bin/activate   # Mac/Linux
 env\Scripts\activate      # Windows
 
-3️⃣ Install dependencies
+3️ Install dependencies
 pip install -r requirements.txt
 
-4️⃣ Apply migrations
+4️ Apply migrations
 python manage.py migrate
 
-5️⃣ Create a superuser
+5️ Create a superuser
 python manage.py createsuperuser
 
-6️⃣ Run the server
+6️ Run the server
 python manage.py runserver
