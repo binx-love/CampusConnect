@@ -184,3 +184,59 @@ def join_activity(request, activity_id):
 def teambuilding(request):
     activities = TeamBuilding.objects.all()
     return render(request, 'campusConnect/teambuilding.html', {'activities': activities})
+
+# ---------- DELETE ANNOUNCEMENT ----------
+@login_required
+def delete_announcement(request, announcement_id):
+    if not request.user.is_staff:
+        return HttpResponse("🚫 Only staff can delete announcements.", status=403)
+    
+    announcement = get_object_or_404(Announcement, id=announcement_id)
+    
+    if request.method == 'POST':
+        announcement.delete()
+        return redirect('announcement')
+    
+    return redirect('announcement')
+
+# ---------- ADD TUTOR ----------
+@login_required
+def add_tutor(request):
+    if not request.user.is_staff:
+        return HttpResponse("🚫 Only lecturers can add tutoring sessions.", status=403)
+    
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        subject = request.POST.get('subject')
+        availability = request.POST.get('availability')
+        contact = request.POST.get('contact')
+        rate = request.POST.get('rate', '')
+        
+        Tutor.objects.create(
+            name=name,
+            subject=subject,
+            availability=availability,
+            contact=contact,
+            rate=rate,
+            lecturer=request.user
+        )
+        return redirect('tutors')
+    
+    return redirect('tutors')
+
+
+# ---------- DELETE TUTOR ----------
+@login_required
+def delete_tutor(request, tutor_id):
+    if not request.user.is_staff:
+        return HttpResponse("🚫 Only lecturers can delete tutoring sessions.", status=403)
+    
+    tutor = get_object_or_404(Tutor, id=tutor_id)
+    
+    # Check if the tutor belongs to the logged-in lecturer
+    if tutor.lecturer != request.user:
+        return HttpResponse("🚫 You can only delete your own tutoring sessions.", status=403)
+    
+    if request.method == 'POST':
+        tutor.delete()
+        return redirect('tutors')

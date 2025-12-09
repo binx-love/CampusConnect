@@ -31,4 +31,10 @@ urlpatterns = [
     path('teambuilding/', views.teambuilding, name='teambuilding'),
     path('create-samples/', create_sample_activities, name='create_samples'),
     path('join-activity/<int:activity_id>/', join_activity, name='join_activity'),
+
+path('announcement/delete/<int:announcement_id>/', views.delete_announcement, name='delete_announcement'),
+
+path('tutors/add/', views.add_tutor, name='add_tutor'),
+path('tutors/delete/<int:tutor_id>/', views.delete_tutor, name='delete_tutor'),
+
 ]

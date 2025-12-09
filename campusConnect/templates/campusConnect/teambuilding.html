@@ -30,6 +30,7 @@
     <h1 class="text-center">Team Building Activities</h1>
 
     <div class="row">
+        <!-- Database Activities (if any) -->
         {% for activity in activities %}
         <div class="col-md-4 mb-4">
             <div class="card h-100 shadow">
@@ -38,90 +39,95 @@
                     <p class="card-text">{{ activity.description|truncatechars:150 }}</p>
                     <p class="mb-1"><small class="text-muted">Organizer: {{ activity.organizer.username }}</small></p>
                     <p><small class="text-muted">Date: {{ activity.date|date:"M d, Y" }}</small></p>
+                    
                     {% if user.is_authenticated and not user.is_staff %}
                     <form method="POST" action="{% url 'join_activity' activity.id %}" class="mt-auto">
                         {% csrf_token %}
                         <button type="submit" class="btn btn-success btn-sm w-100">Join Activity</button>
                     </form>
- 
-
-<div class="row">
-
-    <!-- Activity 1 -->
-    <div class="col-md-4 mb-4">
-        <div class="card h-100 shadow">
-            <div class="card-body d-flex flex-column">
-                <h5 class="card-title">Outdoor Obstacle Challenge</h5>
-                <p class="card-text">A fun physical course to build teamwork, trust, and quick problem-solving.</p>
-                <p class="mb-1"><small class="text-muted">Organizer: campus_admin</small></p>
-                <p><small class="text-muted">Date: Feb 12, 2025</small></p>
-
-                <a href="#" class="btn btn-success btn-sm w-100 mt-auto">Join Activity</a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Activity 2 -->
-    <div class="col-md-4 mb-4">
-        <div class="card h-100 shadow">
-            <div class="card-body d-flex flex-column">
-                <h5 class="card-title">Creative Problem-Solving Workshop</h5>
-                <p class="card-text">Teams compete in solving timed challenges using limited resources.</p>
-                <p class="mb-1"><small class="text-muted">Organizer: events_team</small></p>
-                <p><small class="text-muted">Date: Mar 3, 2025</small></p>
-
-                <a href="#" class="btn btn-success btn-sm w-100 mt-auto">Join Activity</a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Activity 3 -->
-    <div class="col-md-4 mb-4">
-        <div class="card h-100 shadow">
-            <div class="card-body d-flex flex-column">
-                <h5 class="card-title">Campus Treasure Hunt</h5>
-                <p class="card-text">Solve clues, race across campus, and learn collaboration skills.</p>
-                <p class="mb-1"><small class="text-muted">Organizer: student_union</small></p>
-                <p><small class="text-muted">Date: Jan 28, 2025</small></p>
-
-                <a href="#" class="btn btn-success btn-sm w-100 mt-auto">Join Activity</a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Activity 4 -->
-    <div class="col-md-4 mb-4">
-        <div class="card h-100 shadow">
-            <div class="card-body d-flex flex-column">
-                <h5 class="card-title">Team Cooking Challenge</h5>
-                <p class="card-text">Groups compete to prepare a meal under time pressure — teamwork guaranteed.</p>
-                <p class="mb-1"><small class="text-muted">Organizer: life_skills_club</small></p>
-                <p><small class="text-muted">Date: Feb 20, 2025</small></p>
-
-                <a href="#" class="btn btn-success btn-sm w-100 mt-auto">Join Activity</a>
-            </div>
-        </div>
-    </div>
-
-</div>
-{% if messages %}
-<div class="container mt-3">
-    {% for message in messages %}
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ message }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    {% endfor %}
-</div>
-{% endif %}
-
-                   {% endif %}
+                    {% endif %}
                 </div>
             </div>
         </div>
-        {% empty %}
-        <p class="text-center">team-building activities scheduled at the moment.</p>
         {% endfor %}
+
+        <!-- Hardcoded Activity 1 -->
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">Outdoor Obstacle Challenge</h5>
+                    <p class="card-text">A fun physical course to build teamwork, trust, and quick problem-solving.</p>
+                    <p class="mb-1"><small class="text-muted">Organizer: campus_admin</small></p>
+                    <p><small class="text-muted">Date: Feb 12, 2025</small></p>
+                    <button class="btn btn-success btn-sm w-100 mt-auto">Join Activity</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hardcoded Activity 2 -->
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">Creative Problem-Solving Workshop</h5>
+                    <p class="card-text">Teams compete in solving timed challenges using limited resources.</p>
+                    <p class="mb-1"><small class="text-muted">Organizer: events_team</small></p>
+                    <p><small class="text-muted">Date: Mar 3, 2025</small></p>
+                    <button class="btn btn-success btn-sm w-100 mt-auto">Join Activity</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hardcoded Activity 3 -->
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">Campus Treasure Hunt</h5>
+                    <p class="card-text">Solve clues, race across campus, and learn collaboration skills.</p>
+                    <p class="mb-1"><small class="text-muted">Organizer: student_union</small></p>
+                    <p><small class="text-muted">Date: Jan 28, 2025</small></p>
+                    <button class="btn btn-success btn-sm w-100 mt-auto">Join Activity</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hardcoded Activity 4 -->
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">Team Cooking Challenge</h5>
+                    <p class="card-text">Groups compete to prepare a meal under time pressure — teamwork guaranteed.</p>
+                    <p class="mb-1"><small class="text-muted">Organizer: life_skills_club</small></p>
+                    <p><small class="text-muted">Date: Feb 20, 2025</small></p>
+                    <button class="btn btn-success btn-sm w-100 mt-auto">Join Activity</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hardcoded Activity 5 -->
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">Escape Room Experience</h5>
+                    <p class="card-text">Work together to solve puzzles and escape the room within 60 minutes.</p>
+                    <p class="mb-1"><small class="text-muted">Organizer: social_committee</small></p>
+                    <p><small class="text-muted">Date: Mar 15, 2025</small></p>
+                    <button class="btn btn-success btn-sm w-100 mt-auto">Join Activity</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hardcoded Activity 6 -->
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">Community Service Day</h5>
+                    <p class="card-text">Give back to the community while building bonds with fellow students.</p>
+                    <p class="mb-1"><small class="text-muted">Organizer: volunteer_society</small></p>
+                    <p><small class="text-muted">Date: Apr 5, 2025</small></p>
+                    <button class="btn btn-success btn-sm w-100 mt-auto">Join Activity</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="text-center mt-4">
