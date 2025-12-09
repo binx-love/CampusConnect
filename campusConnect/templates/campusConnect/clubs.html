@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CampusConnect Clubs</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+        }
+        .card {
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-3px);
+        }
+        .hero {
+            background-color: #28a745;
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <h1 class="display-5">University Clubs</h1>
+        <p class="lead">Explore and join clubs to enhance your campus life</p>
+    </div>
+
+    <div class="container mb-5">
+        <div class="row">
+            {% for club in clubs %}
+            <div class="col-md-4 mb-3">
+                <div class="card h-100 p-3">
+                    <h5 class="card-title">{{ club.name }}</h5>
+                    <p class="card-text">{{ club.description|truncatechars:120 }}</p>
+                    <p><small class="text-muted">Patron: {{ club.patron.username }}</small></p>
+                    {% if user.is_authenticated and not user.is_staff %}
+                    <!-- Join Club Form -->
+                    <form method="POST" action="{% url 'join_club' club.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-success btn-sm">Join Club</button>
+                    </form>
+                    {% endif %}
+                </div>
+            </div>
+            {% empty %}
+            <p class="text-center">clubs available at the moment.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center py-4" style="background-color: #e9ecef;">
+        <p>&copy; 2025 CampusConnect. All rights reserved.</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <div class="container mb-5">
+    <div class="row">
+
+        <!-- ==================== STATIC SAMPLE CLUBS (4 clubs) ==================== -->
+        <div class="col-md-4 mb-3">
+            <div class="card h-100 p-3">
+                <h5 class="card-title">Tech Innovators Club</h5>
+                <p class="card-text">
+                    A club for students passionate about coding, robotics, and emerging technologies.
+                </p>
+                <p><small class="text-muted">Patron: Dr. Kamau</small></p>
+                <button class="btn btn-secondary btn-sm" disabled>Join Club</button>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card h-100 p-3">
+                <h5 class="card-title">Photography & Media Club</h5>
+                <p class="card-text">
+                    Capture moments, learn editing, and participate in media projects around campus.
+                </p>
+                <p><small class="text-muted">Patron: Ms. Atieno</small></p>
+                <button class="btn btn-secondary btn-sm" disabled>Join Club</button>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card h-100 p-3">
+                <h5 class="card-title">Environmental Conservation Club</h5>
+                <p class="card-text">
+                    Join activities such as tree planting, clean-up campaigns, and environmental awareness.
+                </p>
+                <p><small class="text-muted">Patron: Mr. Mwangi</small></p>
+                <button class="btn btn-secondary btn-sm" disabled>Join Club</button>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card h-100 p-3">
+                <h5 class="card-title">Performing Arts & Dance Club</h5>
+                <p class="card-text">
+                    For lovers of music, dance, drama, and stage performances. Showcase your talent!
+                </p>
+                <p><small class="text-muted">Patron: Mrs. Njeri</small></p>
+                <button class="btn btn-secondary btn-sm" disabled>Join Club</button>
+            </div>
+        </div>
+
+        <!-- ==================== DJANGO DYNAMIC CLUB LOOP ==================== -->
+        {% for club in clubs %}
+        <div class="col-md-4 mb-3">
+            <div class="card h-100 p-3">
+                <h5 class="card-title">{{ club.name }}</h5>
+                <p class="card-text">{{ club.description|truncatechars:120 }}</p>
+                <p><small class="text-muted">Patron: {{ club.patron.username }}</small></p>
+
+                {% if user.is_authenticated and not user.is_staff %}
+                <form method="POST" action="{% url 'join_club' club.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-success btn-sm">Join Club</button>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+        {% empty %}
+            <p class="text-center">No clubs available at the moment.</p>
+        {% endfor %}
+
+    </div>
+</div>
+
+</body>
+</html>
